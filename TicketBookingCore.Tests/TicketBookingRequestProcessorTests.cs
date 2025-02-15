@@ -19,7 +19,7 @@ namespace TicketBookingCore.Tests
         _processor = new TicketBookingRequestProcessor(_ticketBookingRepositoryMock.Object); 
         }
 
-        /*
+        
         [Fact]
         public void ShouldReturnTicketBookingResultWithRequestValue()
         {
@@ -50,7 +50,9 @@ namespace TicketBookingCore.Tests
             var exception = Assert.Throws<ArgumentNullException>(() => _processor.Book(null));
             //Assert
             Assert.Equal("request", exception.ParamName);
-        } */
+        } 
+
+       
 
 
         [Fact]
