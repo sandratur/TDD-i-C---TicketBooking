@@ -50,10 +50,24 @@ namespace TicketBookingCore.Tests
             var exception = Assert.Throws<ArgumentNullException>(() => _processor.Book(null));
             //Assert
             Assert.Equal("request", exception.ParamName);
-        } 
+        }
 
-       
 
+        [Fact]
+        public void ShouldReturnErrorForInvalidEmail()
+        {
+            var request = new TicketBookingRequest
+            {
+                FirstName = "Sandra",
+                LastName = "Turesson",
+                Email = "ejmail.format" //ogiltigt format för email
+            };
+
+            TicketBookingResponse response = _processor.Book(request);
+
+            Assert.Null(response);  //ingen bokning ska skapas om format för mail är felaktigt
+
+        }
 
         [Fact]
         public void ShouldSaveToDatabase()
