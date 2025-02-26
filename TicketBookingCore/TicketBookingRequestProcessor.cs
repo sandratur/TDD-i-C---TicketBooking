@@ -36,9 +36,19 @@ namespace TicketBookingCore
                 Email = request.Email,
             }; */
 
+            if (!EmailValdiator(request.Email))
+            {
+                return null; //returnerar inget vid ogitligt email format
+            }
+
             _ticketBookingRepository.Save(Create<TicketBooking>(request));
 
             return Create<TicketBookingResponse>(request);
+        }
+
+        private bool EmailValdiator(string email)
+        {
+            return email.Contains("@") && email.Contains("."); //email måste ha @ och . för rätt format
         }
 
         private static T Create<T>(TicketBookingRequest request) where T : TicketBookingBase, new()
