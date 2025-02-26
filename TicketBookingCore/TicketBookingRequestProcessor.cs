@@ -36,9 +36,10 @@ namespace TicketBookingCore
                 Email = request.Email,
             }; */
 
-            if (!EmailValdiator(request.Email))
+            if (!EmailValidator(request.Email))
             {
-                return null; //returnerar inget vid ogitligt email format
+                throw new ArgumentException("Eposten är i ogiltigt format. Försök igen"); //stoppar programmet och ger felmeddelande
+
             }
 
             _ticketBookingRepository.Save(Create<TicketBooking>(request));
@@ -46,7 +47,7 @@ namespace TicketBookingCore
             return Create<TicketBookingResponse>(request);
         }
 
-        private bool EmailValdiator(string email)
+        private bool EmailValidator(string email)
         {
             return email.Contains("@") && email.Contains("."); //email måste ha @ och . för rätt format
         }

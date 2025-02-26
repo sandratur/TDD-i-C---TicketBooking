@@ -63,9 +63,8 @@ namespace TicketBookingCore.Tests
                 Email = "ejmail.format" //ogiltigt format för email
             };
 
-            TicketBookingResponse response = _processor.Book(request);
-
-            Assert.Null(response);  //ingen bokning ska skapas om format för mail är felaktigt
+            var emailException = Assert.Throws<ArgumentException>(() => _processor.Book(request)); 
+            Assert.Equal("Eposten är i ogiltigt format. Försök igen", emailException.Message); //stoppar program och skriver ut felmeddelande
 
         }
 
